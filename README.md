@@ -3,7 +3,7 @@
 ###Ostrich Informatics - Team
 
 * [Candice Michelon](https://github.com/CanTM)
-* Giovanni Cupertino
+* [Giovanni Cupertino](https://github.com/GiovanniCuper)
 * [Matthias Nunes](https://github.com/execb5)
 
 ######Data de entrega: 25/11/2014
