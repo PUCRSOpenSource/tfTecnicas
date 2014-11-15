@@ -10,5 +10,14 @@ package Negocio;
  * @author CanTM
  */
 public class Salas {
-    
+    private int id;
+    private int capacidade;
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public int getId() {
+        return id;
+    }
 }
