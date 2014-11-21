@@ -5,6 +5,9 @@
  */
 package Negocio;
 
+import Persistencia.FilmesDAODerby;
+import Persistencia.HorariosDAODerby;
+import Persistencia.SessoesDAODerby;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,27 +18,44 @@ import java.util.List;
  */
 public class CinemaFachada {
     
-    public Filmes buscarfilme(String nome){
+    private FilmesDAO filmesDAO;
+    private SessoesDAO sessoesDAO;
+    private HorariosDAO horariosDAO;
+    
+    public Filmes buscarFilme(String nome) throws FilmesDAOException{
         //Busca um filme pelo seu nome
-        Filmes filme =null;
+        filmesDAO = new FilmesDAODerby();
+        Filmes filme = null;
+        filme = filmesDAO.buscaFilmePorNome(nome);
         return filme;
     }
     
-    public List<Sessoes> buscarSessoesDeFilme(String nomeDoFilme){
+    public List<Sessoes> buscarSessoesDeFilme(String nomeDoFilme) throws FilmesDAOException, SessoesDAOException{
         //Busca as sessões de exibição de um filme
+        filmesDAO = new FilmesDAODerby();
+        Filmes filme = null;
+        filme = filmesDAO.buscaFilmePorNome(nomeDoFilme);
+        sessoesDAO = new SessoesDAODerby();
         List<Sessoes> sessoes = new ArrayList<>();
+        sessoes = sessoesDAO.buscaPorFilme(filme.getId());
         return sessoes;
     }
     
-    public List<Sessoes> buscarSessoesPorData(Date data){
+    public List<Sessoes> buscarSessoesPorData(Date data) throws SessoesDAOException{
         //Busca as sessões de exibição por data
+        sessoesDAO = new SessoesDAODerby();
         List<Sessoes> sessoes = new ArrayList<>();
+        sessoes = sessoesDAO.buscaPorData(data);
         return sessoes;
     }
     
-    public List<Sessoes> buscarSessoesPorHorario(String inicio){
+    public List<Sessoes> buscarSessoesPorHorario(String inicio) throws HorariosDAOException, SessoesDAOException{
         //Busca as sessões de exibição por horario na data corrente
+        horariosDAO = new HorariosDAODerby();
+        Horarios horario = horariosDAO.buscaHorarioPorInicio(inicio);
+        sessoesDAO = new SessoesDAODerby();
         List<Sessoes> sessoes = new ArrayList<>();
+        sessoes = sessoesDAO.buscaPorHorario(horario.getId());
         return sessoes;
     }
     

@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author CanTM
  */
-public class SessoesDAODearby implements SessoesDAO {
+public class SessoesDAODerby implements SessoesDAO {
 
     @Override
     public void adicionaSessao(Sessoes sessao) throws SessoesDAOException {

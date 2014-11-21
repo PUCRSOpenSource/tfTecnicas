@@ -64,10 +64,9 @@ public class HorariosDAODerby implements HorariosDAO {
     }
 
     @Override
-    public List<Horarios> buscaHorarioPorInicio(String inicio) throws HorariosDAOException {
+    public Horarios buscaHorarioPorInicio(String inicio) throws HorariosDAOException {
         String sql = "select * from horarios where INICIO = ?";
         Horarios horario = null;
-        List<Horarios> horarios = new ArrayList<>();
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setString(1, inicio);
@@ -78,9 +77,8 @@ public class HorariosDAODerby implements HorariosDAO {
                                 resultado.getString("INICIO"),
                                 resultado.getString("FIM")
                         );
-                        horarios.add(horario);
                     }
-                    return horarios;
+                    return horario;
                 }
             }
         } catch (Exception e) {
