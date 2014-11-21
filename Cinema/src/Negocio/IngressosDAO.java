@@ -5,10 +5,21 @@
  */
 package Negocio;
 
+import java.util.List;
+
 /**
  *
  * @author CanTM
  */
 public interface IngressosDAO {
-    
+
+    public void adicionaIngresso(Ingressos ingresso);
+
+    public Ingressos buscaPorId(int id);
+
+    public List<Ingressos> buscaPorSessao(Sessoes sessao);
+
+    public Ingressos buscaPorCadeira(Cadeiras cadeira);
+
+    public List<Ingressos> buscaTodosIngressos();
 }

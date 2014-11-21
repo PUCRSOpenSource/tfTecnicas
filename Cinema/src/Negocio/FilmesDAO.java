@@ -5,10 +5,19 @@
  */
 package Negocio;
 
+import java.util.List;
+
 /**
  *
  * @author CanTM
  */
 public interface FilmesDAO {
     
+    public void adicionaFilme(Filmes filme);  
+
+    public Filmes buscaFilmePorNome(String nome);
+    
+    public Filmes buscaFilmePorId(int id);
+
+    public List<Filmes> buscaTodosFilmes();
 }

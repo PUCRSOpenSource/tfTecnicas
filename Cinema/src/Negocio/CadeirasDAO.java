@@ -17,7 +17,7 @@ public interface CadeirasDAO {
 
     public void alteraDisponibilidade(Cadeiras cadeira, boolean disponibilidade);
 
-    public Cadeiras buscaCadeira(Cadeiras cadeira);
+    public Cadeiras buscaCadeira(int id);
 
     public List<Cadeiras> buscaCadeirasPorSala(Salas sala);
 

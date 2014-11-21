@@ -5,10 +5,19 @@
  */
 package Negocio;
 
+import java.util.List;
+
 /**
  *
  * @author CanTM
  */
 public interface HorariosDAO {
     
+    public void adicionaHorario(Horarios horario);
+    
+    public Horarios buscaHorarioPorId(int id);
+    
+    public Horarios buscaHorarioPorInicio(String inicio);
+    
+    public List<Horarios> buscaTodosHorarios();
 }
