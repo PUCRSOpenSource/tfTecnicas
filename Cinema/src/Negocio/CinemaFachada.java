@@ -67,23 +67,25 @@ public class CinemaFachada {
     
     public double valorDoIngressoComDescontos(Sessoes sessao, int quantidade, List<Integer> idades){
         //retorna o valor do ingresso já com os descontor aplicados
-        double valor = sessao.getValorIntegral();
+        Descontos d = new Descontos();
+        double valor = d.calculaValorComDesconto(sessao, quantidade, idades);
         return valor;
     }
     
-    public boolean disponibilidadeDeIngresso(Sessoes sessao){
-        //informa sobre a disponibilidade de ingressos para a sessao escolhida
-        boolean disponivel = false;
-        return disponivel;
+    public int disponibilidadeDeIngresso(Sessoes sessao){
+        //informa sobre a quantidade de ingressos disponíveis para venda para a sessao escolhida    
+        int quantidadeDeIngressosDisponiveis = sessao.getVagas();
+        return quantidadeDeIngressosDisponiveis;
     }
     
     public boolean conprarIngresso(Sessoes sessao, int quantidade, List<Integer> idades, List<Integer> nroCadeiras){
+        //Ainda não implementado
         //tenta realizar a compra do cliente, retorna falso caso a caompra não seja efetuada, deve lidar com acesso concorrente ao banco de dados
         boolean compraEfetuada = false;
         return compraEfetuada;
     }
     
-    //Funcionalidades usadas somente pelo gerente
+    //Funcionalidades usadas somente pelo gerente, ainda não implementadas
     public boolean adcionarFilmeParaExibicao(Filmes filme){
         //adiciona um novo filme para exibição
         boolean adicionou = false;
