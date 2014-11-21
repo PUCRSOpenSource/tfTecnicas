@@ -28,7 +28,7 @@ public class HorariosDAODerby implements HorariosDAO {
 
     @Override
     public Horarios buscaHorarioPorId(int id) throws HorariosDAOException {
-        String sql = "select * from horarios where codigo = ?";
+        String sql = "select * from horarios where ID = ?";
         Horarios horario = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
@@ -50,8 +50,28 @@ public class HorariosDAODerby implements HorariosDAO {
     }
 
     @Override
-    public Horarios buscaHorarioPorInicio(String inicio) throws HorariosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Horarios> buscaHorarioPorInicio(String inicio) throws HorariosDAOException {
+        String sql = "select * from horarios where INICIO = ?";
+        Horarios horario = null;
+        List<Horarios> horarios = new ArrayList<>();
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setString(1, inicio);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        horario = new Horarios(
+                                resultado.getInt("ID"),
+                                resultado.getString("INICIO"),
+                                resultado.getString("FIM")
+                        );
+                        horarios.add(horario);
+                    }
+                    return horarios;
+                }
+            }
+        } catch (Exception e) {
+            throw new HorariosDAOException("Falha na busca do horario por inicio", e);
+        }
     }
 
     @Override

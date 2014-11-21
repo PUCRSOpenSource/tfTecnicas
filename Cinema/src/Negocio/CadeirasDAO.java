@@ -19,7 +19,7 @@ public interface CadeirasDAO {
 
     public Cadeiras buscaCadeiraPorId(int id) throws CadeirasDAOException;
 
-    public List<Cadeiras> buscaCadeirasPorSala(Salas sala) throws CadeirasDAOException;
+    public List<Cadeiras> buscaCadeirasPorSala(int salaId) throws CadeirasDAOException;
 
     public List<Cadeiras> buscaTodasCadeiras() throws CadeirasDAOException;
 }

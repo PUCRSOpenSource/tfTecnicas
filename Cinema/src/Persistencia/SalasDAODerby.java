@@ -28,7 +28,7 @@ public class SalasDAODerby implements SalasDAO {
 
     @Override
     public Salas buscaPorId(int id) throws SalasDAOException {
-        String sql = "select * from salas where codigo = ?";
+        String sql = "select * from salas where ID = ?";
         Salas sala = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {

@@ -17,9 +17,7 @@ public interface IngressosDAO {
 
     public Ingressos buscaPorId(int id) throws IngressosDAOException;
 
-    public List<Ingressos> buscaPorSessao(Sessoes sessao) throws IngressosDAOException;
-
-    public Ingressos buscaPorCadeira(Cadeiras cadeira) throws IngressosDAOException;
+    public List<Ingressos> buscaPorSessao(int sessaoId) throws IngressosDAOException;
 
     public List<Ingressos> buscaTodosIngressos() throws IngressosDAOException;
 }

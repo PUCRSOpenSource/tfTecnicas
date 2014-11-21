@@ -5,9 +5,6 @@
  */
 package Persistencia;
 
-import Negocio.Filmes;
-import Negocio.Horarios;
-import Negocio.Salas;
 import Negocio.Sessoes;
 import Negocio.SessoesDAO;
 import Negocio.SessoesDAOException;
@@ -37,7 +34,7 @@ public class SessoesDAODearby implements SessoesDAO {
 
     @Override
     public Sessoes buscaPorId(int id) throws SessoesDAOException {
-        String sql = "select * from sessoes where codigo = ?";
+        String sql = "select * from sessoes where ID = ?";
         Sessoes sessao = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
@@ -64,21 +61,93 @@ public class SessoesDAODearby implements SessoesDAO {
 
     @Override
     public List<Sessoes> buscaPorData(Date data) throws SessoesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from sessoes where DIA = ?";
+        Sessoes sessao = null;
+        List<Sessoes> sessoes = new ArrayList<>();
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setDate(1, (java.sql.Date) data);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        sessao = new Sessoes(
+                                resultado.getInt("ID"),
+                                resultado.getDate("DIA"),
+                                resultado.getInt("VAGAS"),
+                                resultado.getDouble("VALORINTEGRAL"),
+                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDHORARIO"),
+                                resultado.getInt("IDFILME")
+                        );
+                        sessoes.add(sessao);
+                    }
+                    return sessoes;
+                }
+            }
+        } catch (Exception e) {
+            throw new SessoesDAOException("Falha na busca da sessao por data", e);
+        }
     }
 
     @Override
-    public List<Sessoes> buscaPorSala(Salas sala) throws SessoesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Sessoes> buscaPorHorario(int horarioId) throws SessoesDAOException {
+        String sql = "select * from sessoes where IDHORARIO = ?";
+        Sessoes sessao = null;
+        List<Sessoes> sessoes = new ArrayList<>();
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, horarioId);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        sessao = new Sessoes(
+                                resultado.getInt("ID"),
+                                resultado.getDate("DIA"),
+                                resultado.getInt("VAGAS"),
+                                resultado.getDouble("VALORINTEGRAL"),
+                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDHORARIO"),
+                                resultado.getInt("IDFILME")
+                        );
+                        sessoes.add(sessao);
+                    }
+                    return sessoes;
+                }
+            }
+        } catch (Exception e) {
+            throw new SessoesDAOException("Falha na busca da sessao por horario", e);
+        }
     }
 
     @Override
-    public List<Sessoes> buscaPorHorario(Horarios horario) throws SessoesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Sessoes> buscaPorFilme(int filmeId) throws SessoesDAOException {
+        String sql = "select * from sessoes where IDFILME = ?";
+        Sessoes sessao = null;
+        List<Sessoes> sessoes = new ArrayList<>();
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, filmeId);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        sessao = new Sessoes(
+                                resultado.getInt("ID"),
+                                resultado.getDate("DIA"),
+                                resultado.getInt("VAGAS"),
+                                resultado.getDouble("VALORINTEGRAL"),
+                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDHORARIO"),
+                                resultado.getInt("IDFILME")
+                        );
+                        sessoes.add(sessao);
+                    }
+                    return sessoes;
+                }
+            }
+        } catch (Exception e) {
+            throw new SessoesDAOException("Falha na busca da sessao por filme", e);
+        }
     }
 
     @Override
-    public List<Sessoes> buscaPorFilma(Filmes filme) throws SessoesDAOException {
+    public List<Sessoes> buscaTodasSessoes() throws SessoesDAOException {
         List<Sessoes> sessoes = new ArrayList<>();
         String sql = "select * from sessoes";
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {

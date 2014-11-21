@@ -8,7 +8,6 @@ package Persistencia;
 import Negocio.Cadeiras;
 import Negocio.CadeirasDAO;
 import Negocio.CadeirasDAOException;
-import Negocio.Salas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +20,6 @@ import java.util.List;
  * @author CanTM
  */
 public class CadeirasDAODerby implements CadeirasDAO {
-    private Object InicializadorBancoDadosDataSource;
 
     @Override
     public void adicionaCadeira(Cadeiras cadeira) throws CadeirasDAOException {
@@ -35,7 +33,7 @@ public class CadeirasDAODerby implements CadeirasDAO {
 
     @Override
     public Cadeiras buscaCadeiraPorId(int id) throws CadeirasDAOException {
-        String sql = "select * from cadeiras where codigo = ?";
+        String sql = "select * from cadeiras where ID = ?";
         Cadeiras cadeira = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
@@ -57,8 +55,28 @@ public class CadeirasDAODerby implements CadeirasDAO {
     }
 
     @Override
-    public List<Cadeiras> buscaCadeirasPorSala(Salas sala) throws CadeirasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Cadeiras> buscaCadeirasPorSala(int salaId) throws CadeirasDAOException {
+        String sql = "select * from cadeiras where IDSALA = ?";
+        List<Cadeiras> cadeiras = new ArrayList<>();
+        Cadeiras cadeira = null;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, salaId);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        cadeira = new Cadeiras(
+                                resultado.getInt("ID"),
+                                resultado.getInt("IDSALA"),
+                                resultado.getBoolean("DISPONIBILIDADE")
+                        );
+                        cadeiras.add(cadeira);
+                    }
+                    return cadeiras;
+                }
+            }
+        } catch (Exception e) {
+            throw new CadeirasDAOException("Falha na busca da cadeira por sala", e);
+        }
     }
 
     @Override

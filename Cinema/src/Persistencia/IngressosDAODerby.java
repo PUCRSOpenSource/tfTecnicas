@@ -5,11 +5,9 @@
  */
 package Persistencia;
 
-import Negocio.Cadeiras;
 import Negocio.Ingressos;
 import Negocio.IngressosDAO;
 import Negocio.IngressosDAOException;
-import Negocio.Sessoes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +28,7 @@ public class IngressosDAODerby implements IngressosDAO {
 
     @Override
     public Ingressos buscaPorId(int id) throws IngressosDAOException {
-        String sql = "select * from ingressos where codigo = ?";
+        String sql = "select * from ingressos where ID = ?";
         Ingressos ingresso = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
@@ -53,13 +51,29 @@ public class IngressosDAODerby implements IngressosDAO {
     }
 
     @Override
-    public List<Ingressos> buscaPorSessao(Sessoes sessao) throws IngressosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Ingressos buscaPorCadeira(Cadeiras cadeira) throws IngressosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Ingressos> buscaPorSessao(int sessaoId) throws IngressosDAOException {
+        String sql = "select * from ingressos where IDSESSAO = ?";
+        Ingressos ingresso = null;
+        List<Ingressos> ingressos = new ArrayList<>();
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, sessaoId);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        ingresso = new Ingressos(
+                                resultado.getInt("ID"),
+                                resultado.getInt("IDSESSAO"),
+                                resultado.getInt("IDCADEIRA"),
+                                resultado.getDouble("VALORPAGO")
+                        );
+                        ingressos.add(ingresso);
+                    }
+                    return ingressos;
+                }
+            }
+        } catch (Exception e) {
+            throw new IngressosDAOException("Falha na busca do ingressos por sessao", e);
+        }
     }
 
     @Override

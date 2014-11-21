@@ -17,7 +17,7 @@ public interface HorariosDAO {
     
     public Horarios buscaHorarioPorId(int id) throws HorariosDAOException;
     
-    public Horarios buscaHorarioPorInicio(String inicio) throws HorariosDAOException;
+    public List<Horarios> buscaHorarioPorInicio(String inicio) throws HorariosDAOException;
     
     public List<Horarios> buscaTodosHorarios() throws HorariosDAOException;
 }

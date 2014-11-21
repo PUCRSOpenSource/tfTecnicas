@@ -22,9 +22,9 @@ public interface SessoesDAO {
 
     public List<Sessoes> buscaPorData(Date data) throws SessoesDAOException;
 
-    public List<Sessoes> buscaPorSala(Salas sala) throws SessoesDAOException;
+    public List<Sessoes> buscaPorHorario(int horarioId) throws SessoesDAOException;
 
-    public List<Sessoes> buscaPorHorario(Horarios horario) throws SessoesDAOException;
-
-    public List<Sessoes> buscaPorFilma(Filmes filme) throws SessoesDAOException;
+    public List<Sessoes> buscaPorFilme(int filmeId) throws SessoesDAOException;
+    
+    public List<Sessoes> buscaTodasSessoes() throws SessoesDAOException;
 }

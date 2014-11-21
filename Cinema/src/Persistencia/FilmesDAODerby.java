@@ -28,12 +28,35 @@ public class FilmesDAODerby implements FilmesDAO {
 
     @Override
     public Filmes buscaFilmePorNome(String nome) throws FilmesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from filmes where NOME = ?";
+        Filmes filme = null;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setString(1, nome);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        filme = new Filmes(
+                                resultado.getInt("ID"),
+                                resultado.getString("NOME"),
+                                resultado.getString("CARTAZ"),
+                                resultado.getInt("ANOLANCAMENTO"),
+                                resultado.getString("SINOPSE"),
+                                resultado.getString("DIRETOR"),
+                                resultado.getString("ATORES")
+                        );
+                    }
+                    return filme;
+                }
+            }
+        } catch (Exception e) {
+            throw new FilmesDAOException("Falha na busca do filme por nome", e);
+        }
     }
+    
 
     @Override
     public Filmes buscaFilmePorId(int id) throws FilmesDAOException {
-        String sql = "select * from filmes where codigo = ?";
+        String sql = "select * from filmes where ID = ?";
         Filmes filme = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
