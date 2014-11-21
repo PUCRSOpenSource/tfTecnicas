@@ -10,6 +10,7 @@ package Negocio;
  * @author CanTM
  */
 public class Salas {
+
     private int id;
     private int capacidade;
 
@@ -18,11 +19,25 @@ public class Salas {
         this.capacidade = capacidade;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getCapacidade() {
         return capacidade;
     }
 
-    public int getId() {
-        return id;
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
     }
+
+    @Override
+    public String toString() {
+        return "Salas{" + "capacidade=" + capacidade + '}';
+    }
+
 }

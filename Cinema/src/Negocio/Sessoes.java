@@ -35,28 +35,61 @@ public class Sessoes {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Date getDate() {
         return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getVagas() {
         return vagas;
     }
 
+    public void setVagas(int vagas) {
+        this.vagas = vagas;
+    }
+
     public double getValorIntegral() {
         return valorIntegral;
+    }
+
+    public void setValorIntegral(double valorIntegral) {
+        this.valorIntegral = valorIntegral;
     }
 
     public int getSalaId() {
         return salaId;
     }
 
+    public void setSalaId(int salaId) {
+        this.salaId = salaId;
+    }
+
     public int getHorarioId() {
         return horarioId;
     }
 
+    public void setHorarioId(int horarioId) {
+        this.horarioId = horarioId;
+    }
+
     public int getFilmeId() {
         return filmeId;
+    }
+
+    public void setFilmeId(int filmeId) {
+        this.filmeId = filmeId;
+    }
+
+    @Override
+    public String toString() {
+        return "Sessoes{" + "date=" + date + ", vagas=" + vagas + ", valorIntegral=" + valorIntegral + ", salaId=" + salaId + ", horarioId=" + horarioId + ", filmeId=" + filmeId + '}';
     }
 
 }

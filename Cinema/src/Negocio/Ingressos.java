@@ -10,6 +10,7 @@ package Negocio;
  * @author CanTM
  */
 public class Ingressos {
+
     private int id;
     private int sessaoId;
     private int salaId;
@@ -28,22 +29,45 @@ public class Ingressos {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getSessaoId() {
         return sessaoId;
+    }
+
+    public void setSessaoId(int sessaoId) {
+        this.sessaoId = sessaoId;
     }
 
     public int getSalaId() {
         return salaId;
     }
 
+    public void setSalaId(int salaId) {
+        this.salaId = salaId;
+    }
+
     public int getCadeiraId() {
         return cadeiraId;
+    }
+
+    public void setCadeiraId(int cadeiraId) {
+        this.cadeiraId = cadeiraId;
     }
 
     public double getValorPago() {
         return valorPago;
     }
 
+    public void setValorPago(double valorPago) {
+        this.valorPago = valorPago;
+    }
 
-    
+    @Override
+    public String toString() {
+        return "Ingressos{" + "sessaoId=" + sessaoId + ", salaId=" + salaId + ", cadeiraId=" + cadeiraId + ", valorPago=" + valorPago + '}';
+    }
+
 }

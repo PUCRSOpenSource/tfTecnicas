@@ -10,6 +10,7 @@ package Negocio;
  * @author CanTM
  */
 public class Cadeiras {
+
     private int id;
     private int salaId;
     private boolean disponibilidade;
@@ -24,6 +25,10 @@ public class Cadeiras {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getSalaId() {
         return salaId;
     }
@@ -32,12 +37,17 @@ public class Cadeiras {
         this.salaId = salaId;
     }
 
-    public boolean getDisponibilidade() {
+    public boolean isDisponibilidade() {
         return disponibilidade;
     }
 
     public void setDisponibilidade(boolean disponibilidade) {
         this.disponibilidade = disponibilidade;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Cadeiras{" + "salaId=" + salaId + ", disponibilidade=" + disponibilidade + '}';
+    }
+
 }

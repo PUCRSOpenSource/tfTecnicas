@@ -29,7 +29,7 @@ public class CadeirasDAODerby implements CadeirasDAO {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, cadeira.getId());
                 comando.setInt(2, cadeira.getSalaId());
-                comando.setBoolean(3, cadeira.getDisponibilidade());
+                comando.setBoolean(3, cadeira.isDisponibilidade());
                 resultado = comando.executeUpdate();
             }
         } catch (Exception e) {

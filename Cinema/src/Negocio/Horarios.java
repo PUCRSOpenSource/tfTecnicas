@@ -10,6 +10,7 @@ package Negocio;
  * @author CanTM
  */
 public class Horarios {
+
     private int id;
     private String inicio;
     private String fim;
@@ -22,6 +23,10 @@ public class Horarios {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getInicio() {
@@ -39,6 +44,10 @@ public class Horarios {
     public void setFim(String fim) {
         this.fim = fim;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Horarios{" + "inicio=" + inicio + ", fim=" + fim + '}';
+    }
+
 }

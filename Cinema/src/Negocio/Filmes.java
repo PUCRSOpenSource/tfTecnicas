@@ -10,6 +10,7 @@ package Negocio;
  * @author CanTM
  */
 public class Filmes {
+
     private int id;
     private String nome;
     private String cartaz;
@@ -17,10 +18,6 @@ public class Filmes {
     private String sinopse;
     private String diretor;
     private String Atores;
-
-    public int getId() {
-        return id;
-    }
 
     public Filmes(int id, String nome, String cartaz, int anolancamento, String sinopse, String diretor, String Atores) {
         this.id = id;
@@ -30,6 +27,14 @@ public class Filmes {
         this.sinopse = sinopse;
         this.diretor = diretor;
         this.Atores = Atores;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -79,5 +84,10 @@ public class Filmes {
     public void setAtores(String Atores) {
         this.Atores = Atores;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Filmes{" + "nome=" + nome + ", cartaz=" + cartaz + ", anolancamento=" + anolancamento + ", sinopse=" + sinopse + ", diretor=" + diretor + ", Atores=" + Atores + '}';
+    }
+
 }
