@@ -41,8 +41,20 @@ public class CadeirasDAODerby implements CadeirasDAO {
     }
 
     @Override
-    public void alteraDisponibilidade(Cadeiras cadeira, boolean disponibilidade) throws CadeirasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alteraDisponibilidade(int id, boolean disponibilidade) throws CadeirasDAOException {
+        String sql = "update cadeiras set DISPONIBILIDADE=? where ID = ?";
+        int resultado = 0;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setBoolean(1, disponibilidade);
+                resultado = comando.executeUpdate();
+            }
+        } catch (Exception e) {
+            throw new CadeirasDAOException("Falha na alteração da disponibilidade", e);
+        }
+        if (resultado == 0) {
+            throw new CadeirasDAOException("Falha na alteração da disponibilidade");
+        }
     }
 
     @Override

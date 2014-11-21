@@ -46,8 +46,20 @@ public class SessoesDAODearby implements SessoesDAO {
     }
 
     @Override
-    public void atualizaVagas(int vagas) throws SessoesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void atualizaVagas(int id, int vagas) throws SessoesDAOException {
+        String sql = "update sessoes set VAGAS=? where ID = ?";
+        int resultado = 0;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, vagas);
+                resultado = comando.executeUpdate();
+            }
+        } catch (Exception e) {
+            throw new SessoesDAOException("Falha na alteração das vagas", e);
+        }
+        if (resultado == 0) {
+            throw new SessoesDAOException("Falha na alteração das vagas");
+        }
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface SessoesDAO {
 
     public void adicionaSessao(Sessoes sessao) throws SessoesDAOException;
 
-    public void atualizaVagas(int vagas) throws SessoesDAOException;
+    public void atualizaVagas(int id, int vagas) throws SessoesDAOException;
 
     public Sessoes buscaPorId(int id) throws SessoesDAOException;
 

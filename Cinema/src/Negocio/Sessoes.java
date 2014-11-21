@@ -12,6 +12,7 @@ import java.util.Date;
  * @author CanTM
  */
 public class Sessoes {
+
     private int id;
     private Date date;
     private int vagas;
