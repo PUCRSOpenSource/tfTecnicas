@@ -12,9 +12,10 @@ import java.util.List;
  * @author CanTM
  */
 public interface SalasDAO {
+
     public void adicionaSala(Salas sala);
-    
+
     public Salas buscaPorId(int id);
-    
+
     public List<Salas> buscaTodasSalas();
 }

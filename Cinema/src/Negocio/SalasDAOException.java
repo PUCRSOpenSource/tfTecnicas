@@ -9,6 +9,17 @@ package Negocio;
  *
  * @author CanTM
  */
-public class SalasDAOException {
-    
+public class SalasDAOException extends Exception {
+
+    public SalasDAOException() {
+        super();
+    }
+
+    public SalasDAOException(String mensagem) {
+        super(mensagem);
+    }
+
+    public SalasDAOException(String mensagem, Throwable causa) {
+        super(mensagem, causa);
+    }
 }

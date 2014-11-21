@@ -13,17 +13,18 @@ import java.util.List;
  * @author CanTM
  */
 public interface SessoesDAO {
+
     public void adicionaSessao(Sessoes sessao);
-    
+
     public void atualizaVagas(int vagas);
-    
+
     public Sessoes buscaPorId(int id);
-    
+
     public List<Sessoes> buscaPorData(Date data);
-    
+
     public List<Sessoes> buscaPorSala(Salas sala);
-    
+
     public List<Sessoes> buscaPorHorario(Horarios horario);
-    
+
     public List<Sessoes> buscaPorFilma(Filmes filme);
 }

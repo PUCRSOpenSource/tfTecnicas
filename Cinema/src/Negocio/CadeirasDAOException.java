@@ -9,6 +9,17 @@ package Negocio;
  *
  * @author CanTM
  */
-public class CadeirasDAOException {
+public class CadeirasDAOException extends Exception {
     
+    public CadeirasDAOException() {
+        super();
+    }
+
+    public CadeirasDAOException(String mensagem) {
+        super(mensagem);
+    }
+
+    public CadeirasDAOException(String mensagem, Throwable causa) {
+        super(mensagem, causa);
+    }
 }

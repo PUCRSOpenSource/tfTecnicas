@@ -9,6 +9,17 @@ package Negocio;
  *
  * @author CanTM
  */
-public class IngressosDAOException {
-    
+public class IngressosDAOException extends Exception {
+
+    public IngressosDAOException() {
+        super();
+    }
+
+    public IngressosDAOException(String mensagem) {
+        super(mensagem);
+    }
+
+    public IngressosDAOException(String mensagem, Throwable causa) {
+        super(mensagem, causa);
+    }
 }

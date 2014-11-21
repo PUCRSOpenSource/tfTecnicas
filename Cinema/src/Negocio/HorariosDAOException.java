@@ -9,6 +9,17 @@ package Negocio;
  *
  * @author CanTM
  */
-public class HorariosDAOException {
-    
+public class HorariosDAOException extends Exception {
+
+    public HorariosDAOException() {
+        super();
+    }
+
+    public HorariosDAOException(String mensagem) {
+        super(mensagem);
+    }
+
+    public HorariosDAOException(String mensagem, Throwable causa) {
+        super(mensagem, causa);
+    }
 }

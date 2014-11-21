@@ -9,6 +9,17 @@ package Negocio;
  *
  * @author CanTM
  */
-public class SessoesDAOException {
-    
+public class SessoesDAOException extends Exception {
+
+    public SessoesDAOException() {
+        super();
+    }
+
+    public SessoesDAOException(String mensagem) {
+        super(mensagem);
+    }
+
+    public SessoesDAOException(String mensagem, Throwable causa) {
+        super(mensagem, causa);
+    }
 }
