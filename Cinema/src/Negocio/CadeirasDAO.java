@@ -5,10 +5,21 @@
  */
 package Negocio;
 
+import java.util.List;
+
 /**
  *
  * @author CanTM
  */
 public interface CadeirasDAO {
-    
+
+    public void adicionaCadeira(Cadeiras cadeira);
+
+    public void alteraDisponibilidade(Cadeiras cadeira, boolean disponibilidade);
+
+    public Cadeiras buscaCadeira(Cadeiras cadeira);
+
+    public List<Cadeiras> buscaCadeirasPorSala(Salas sala);
+
+    public List<Cadeiras> buscaTodasCadeiras();
 }
