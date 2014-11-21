@@ -23,7 +23,21 @@ public class HorariosDAODerby implements HorariosDAO {
 
     @Override
     public void adicionaHorario(Horarios horario) throws HorariosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "insert into horarios(ID,INICIO,FIM) values(?,?,?)";
+        int resultado = 0;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, horario.getId());
+                comando.setString(2, horario.getInicio());
+                comando.setString(3, horario.getFim());
+                resultado = comando.executeUpdate();
+            }
+        } catch (Exception e) {
+            throw new HorariosDAOException("Falha na inserção de horário", e);
+        }
+        if (resultado == 0) {
+            throw new HorariosDAOException("Falha na inserção de horário");
+        }
     }
 
     @Override

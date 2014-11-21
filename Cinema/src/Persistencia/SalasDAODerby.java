@@ -23,7 +23,20 @@ public class SalasDAODerby implements SalasDAO {
 
     @Override
     public void adicionaSala(Salas sala) throws SalasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "insert into salas(ID,CAPACIDADE) values(?,?)";
+        int resultado = 0;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, sala.getId());
+                comando.setInt(2, sala.getCapacidade());
+                resultado = comando.executeUpdate();
+            }
+        } catch (Exception e) {
+            throw new SalasDAOException("Falha na inserção de sala", e);
+        }
+        if (resultado == 0) {
+            throw new SalasDAOException("Falha na inserção de sala");
+        }
     }
 
     @Override

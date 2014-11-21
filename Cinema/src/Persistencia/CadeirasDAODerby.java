@@ -23,7 +23,21 @@ public class CadeirasDAODerby implements CadeirasDAO {
 
     @Override
     public void adicionaCadeira(Cadeiras cadeira) throws CadeirasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "insert into cadeiras(ID,IDSALA,DISPONIBILIDADE) values(?,?,?)";
+        int resultado = 0;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, cadeira.getId());
+                comando.setInt(2, cadeira.getSalaId());
+                comando.setBoolean(3, cadeira.getDisponibilidade());
+                resultado = comando.executeUpdate();
+            }
+        } catch (Exception e) {
+            throw new CadeirasDAOException("Falha na inserção de cadeira", e);
+        }
+        if (resultado == 0) {
+            throw new CadeirasDAOException("Falha na inserção de cadeira");
+        }
     }
 
     @Override

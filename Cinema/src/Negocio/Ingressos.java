@@ -12,12 +12,14 @@ package Negocio;
 public class Ingressos {
     private int id;
     private int sessaoId;
+    private int salaId;
     private int cadeiraId;
     private double valorPago;
 
-    public Ingressos(int id, int sessaoId, int cadeiraId, double valorPago) {
+    public Ingressos(int id, int sessaoId, int salaId, int cadeiraId, double valorPago) {
         this.id = id;
         this.sessaoId = sessaoId;
+        this.salaId = salaId;
         this.cadeiraId = cadeiraId;
         this.valorPago = valorPago;
     }
@@ -26,11 +28,15 @@ public class Ingressos {
         return id;
     }
 
-    public int getSessao() {
+    public int getSessaoId() {
         return sessaoId;
     }
 
-    public int getCadeira() {
+    public int getSalaId() {
+        return salaId;
+    }
+
+    public int getCadeiraId() {
         return cadeiraId;
     }
 
@@ -38,8 +44,6 @@ public class Ingressos {
         return valorPago;
     }
 
-    public void setValorPago(double valorPago) {
-        this.valorPago = valorPago;
-    }
+
     
 }

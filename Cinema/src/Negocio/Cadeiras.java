@@ -32,7 +32,7 @@ public class Cadeiras {
         this.salaId = salaId;
     }
 
-    public boolean isDisponibilidade() {
+    public boolean getDisponibilidade() {
         return disponibilidade;
     }
 

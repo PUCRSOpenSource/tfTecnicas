@@ -23,7 +23,25 @@ public class FilmesDAODerby implements FilmesDAO {
 
     @Override
     public void adicionaFilme(Filmes filme) throws FilmesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "insert into filmes(ID,NOME,CARTAZ,ANOLANCAMENTO,SINOPSE,DIRETOR,ATORES) values(?,?,?,?,?,?,?)";
+        int resultado = 0;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, filme.getId());
+                comando.setString(2, filme.getNome());
+                comando.setString(3, filme.getCartaz());
+                comando.setInt(4, filme.getAnolancamento());
+                comando.setString(5, filme.getSinopse());
+                comando.setString(6, filme.getDiretor());
+                comando.setString(7, filme.getAtores());
+                resultado = comando.executeUpdate();
+            }
+        } catch (Exception e) {
+            throw new FilmesDAOException("Falha na inserção de filme", e);
+        }
+        if (resultado == 0) {
+            throw new FilmesDAOException("Falha na inserção de filme");
+        }
     }
 
     @Override

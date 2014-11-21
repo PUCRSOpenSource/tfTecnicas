@@ -38,35 +38,24 @@ public class Sessoes {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public int getVagas() {
         return vagas;
-    }
-
-    public void setVagas(int vagas) {
-        this.vagas = vagas;
     }
 
     public double getValorIntegral() {
         return valorIntegral;
     }
 
-    public void setValorIntegral(double valorIntegral) {
-        this.valorIntegral = valorIntegral;
+    public int getSalaId() {
+        return salaId;
     }
 
-    public int getFilme() {
-        return filmeId;
-    }
-
-    public int getHorario() {
+    public int getHorarioId() {
         return horarioId;
     }
 
-    public int getSala() {
-        return salaId;
+    public int getFilmeId() {
+        return filmeId;
     }
+
 }
