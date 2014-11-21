@@ -13,13 +13,13 @@ import java.util.List;
  */
 public interface IngressosDAO {
 
-    public void adicionaIngresso(Ingressos ingresso);
+    public void adicionaIngresso(Ingressos ingresso) throws IngressosDAOException;
 
-    public Ingressos buscaPorId(int id);
+    public Ingressos buscaPorId(int id) throws IngressosDAOException;
 
-    public List<Ingressos> buscaPorSessao(Sessoes sessao);
+    public List<Ingressos> buscaPorSessao(Sessoes sessao) throws IngressosDAOException;
 
-    public Ingressos buscaPorCadeira(Cadeiras cadeira);
+    public Ingressos buscaPorCadeira(Cadeiras cadeira) throws IngressosDAOException;
 
-    public List<Ingressos> buscaTodosIngressos();
+    public List<Ingressos> buscaTodosIngressos() throws IngressosDAOException;
 }

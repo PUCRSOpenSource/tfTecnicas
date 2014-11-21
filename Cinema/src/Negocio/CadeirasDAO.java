@@ -13,13 +13,13 @@ import java.util.List;
  */
 public interface CadeirasDAO {
 
-    public void adicionaCadeira(Cadeiras cadeira);
+    public void adicionaCadeira(Cadeiras cadeira) throws CadeirasDAOException;
 
-    public void alteraDisponibilidade(Cadeiras cadeira, boolean disponibilidade);
+    public void alteraDisponibilidade(Cadeiras cadeira, boolean disponibilidade) throws CadeirasDAOException;
 
-    public Cadeiras buscaCadeira(int id);
+    public Cadeiras buscaCadeira(int id) throws CadeirasDAOException;
 
-    public List<Cadeiras> buscaCadeirasPorSala(Salas sala);
+    public List<Cadeiras> buscaCadeirasPorSala(Salas sala) throws CadeirasDAOException;
 
-    public List<Cadeiras> buscaTodasCadeiras();
+    public List<Cadeiras> buscaTodasCadeiras() throws CadeirasDAOException;
 }

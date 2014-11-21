@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface HorariosDAO {
     
-    public void adicionaHorario(Horarios horario);
+    public void adicionaHorario(Horarios horario) throws HorariosDAOException;
     
-    public Horarios buscaHorarioPorId(int id);
+    public Horarios buscaHorarioPorId(int id) throws HorariosDAOException;
     
-    public Horarios buscaHorarioPorInicio(String inicio);
+    public Horarios buscaHorarioPorInicio(String inicio) throws HorariosDAOException;
     
-    public List<Horarios> buscaTodosHorarios();
+    public List<Horarios> buscaTodosHorarios() throws HorariosDAOException;
 }

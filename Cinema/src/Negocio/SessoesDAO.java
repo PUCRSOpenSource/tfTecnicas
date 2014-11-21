@@ -14,17 +14,17 @@ import java.util.List;
  */
 public interface SessoesDAO {
 
-    public void adicionaSessao(Sessoes sessao);
+    public void adicionaSessao(Sessoes sessao) throws SessoesDAOException;
 
-    public void atualizaVagas(int vagas);
+    public void atualizaVagas(int vagas) throws SessoesDAOException;
 
-    public Sessoes buscaPorId(int id);
+    public Sessoes buscaPorId(int id) throws SessoesDAOException;
 
-    public List<Sessoes> buscaPorData(Date data);
+    public List<Sessoes> buscaPorData(Date data) throws SessoesDAOException;
 
-    public List<Sessoes> buscaPorSala(Salas sala);
+    public List<Sessoes> buscaPorSala(Salas sala) throws SessoesDAOException;
 
-    public List<Sessoes> buscaPorHorario(Horarios horario);
+    public List<Sessoes> buscaPorHorario(Horarios horario) throws SessoesDAOException;
 
-    public List<Sessoes> buscaPorFilma(Filmes filme);
+    public List<Sessoes> buscaPorFilma(Filmes filme) throws SessoesDAOException;
 }

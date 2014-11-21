@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface FilmesDAO {
     
-    public void adicionaFilme(Filmes filme);  
+    public void adicionaFilme(Filmes filme) throws FilmesDAOException;  
 
-    public Filmes buscaFilmePorNome(String nome);
+    public Filmes buscaFilmePorNome(String nome) throws FilmesDAOException;
     
-    public Filmes buscaFilmePorId(int id);
+    public Filmes buscaFilmePorId(int id) throws FilmesDAOException;
 
-    public List<Filmes> buscaTodosFilmes();
+    public List<Filmes> buscaTodosFilmes() throws FilmesDAOException;
 }

@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface SalasDAO {
 
-    public void adicionaSala(Salas sala);
+    public void adicionaSala(Salas sala) throws SalasDAOException;
 
-    public Salas buscaPorId(int id);
+    public Salas buscaPorId(int id) throws SalasDAOException;
 
-    public List<Salas> buscaTodasSalas();
+    public List<Salas> buscaTodasSalas() throws SalasDAOException;
 }
