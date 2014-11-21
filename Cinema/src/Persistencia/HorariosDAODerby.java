@@ -9,6 +9,7 @@ import Negocio.Horarios;
 import Negocio.HorariosDAO;
 import Negocio.HorariosDAOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -27,7 +28,25 @@ public class HorariosDAODerby implements HorariosDAO {
 
     @Override
     public Horarios buscaHorarioPorId(int id) throws HorariosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from horarios where codigo = ?";
+        Horarios horario = null;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, id);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        horario = new Horarios(
+                                resultado.getInt("ID"),
+                                resultado.getString("INICIO"),
+                                resultado.getString("FIM")
+                        );
+                    }
+                    return horario;
+                }
+            }
+        } catch (Exception e) {
+            throw new HorariosDAOException("Falha na busca do horario por ID", e);
+        }
     }
 
     @Override

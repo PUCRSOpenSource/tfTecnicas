@@ -9,6 +9,7 @@ import Negocio.Salas;
 import Negocio.SalasDAO;
 import Negocio.SalasDAOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -27,7 +28,24 @@ public class SalasDAODerby implements SalasDAO {
 
     @Override
     public Salas buscaPorId(int id) throws SalasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from salas where codigo = ?";
+        Salas sala = null;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, id);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        sala = new Salas(
+                                resultado.getInt("ID"),
+                                resultado.getInt("CAPACIDADE")
+                        );
+                    }
+                    return sala;
+                }
+            }
+        } catch (Exception e) {
+            throw new SalasDAOException("Falha na busca da sala por ID", e);
+        }
     }
 
     @Override

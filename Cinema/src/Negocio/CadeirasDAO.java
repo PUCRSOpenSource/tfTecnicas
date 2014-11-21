@@ -17,7 +17,7 @@ public interface CadeirasDAO {
 
     public void alteraDisponibilidade(Cadeiras cadeira, boolean disponibilidade) throws CadeirasDAOException;
 
-    public Cadeiras buscaCadeira(int id) throws CadeirasDAOException;
+    public Cadeiras buscaCadeiraPorId(int id) throws CadeirasDAOException;
 
     public List<Cadeiras> buscaCadeirasPorSala(Salas sala) throws CadeirasDAOException;
 

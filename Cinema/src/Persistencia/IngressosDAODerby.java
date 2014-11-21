@@ -11,6 +11,7 @@ import Negocio.IngressosDAO;
 import Negocio.IngressosDAOException;
 import Negocio.Sessoes;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -29,7 +30,26 @@ public class IngressosDAODerby implements IngressosDAO {
 
     @Override
     public Ingressos buscaPorId(int id) throws IngressosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from ingressos where codigo = ?";
+        Ingressos ingresso = null;
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setInt(1, id);
+                try (ResultSet resultado = comando.executeQuery()) {
+                    if (resultado.next()) {
+                        ingresso = new Ingressos(
+                                resultado.getInt("ID"),
+                                resultado.getInt("IDSESSAO"),
+                                resultado.getInt("IDCADEIRA"),
+                                resultado.getDouble("VALORPAGO")
+                        );
+                    }
+                    return ingresso;
+                }
+            }
+        } catch (Exception e) {
+            throw new IngressosDAOException("Falha na busca do ingresso por ID", e);
+        }
     }
 
     @Override
