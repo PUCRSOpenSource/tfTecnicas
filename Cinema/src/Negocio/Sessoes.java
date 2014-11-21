@@ -16,9 +16,19 @@ public class Sessoes {
     private Date date;
     private int vagas;
     private double valorIntegral;
-    private Salas sala;
-    private Horarios horario;
-    private Filmes filme;
+    private int salaId;
+    private int horarioId;
+    private int filmeId;
+
+    public Sessoes(int id, Date date, int vagas, double valorIntegral, int salaId, int horarioId, int filmeId) {
+        this.id = id;
+        this.date = date;
+        this.vagas = vagas;
+        this.valorIntegral = valorIntegral;
+        this.salaId = salaId;
+        this.horarioId = horarioId;
+        this.filmeId = filmeId;
+    }
 
     public int getId() {
         return id;
@@ -48,15 +58,15 @@ public class Sessoes {
         this.valorIntegral = valorIntegral;
     }
 
-    public Filmes getFilme() {
-        return filme;
+    public int getFilme() {
+        return filmeId;
     }
 
-    public Horarios getHorario() {
-        return horario;
+    public int getHorario() {
+        return horarioId;
     }
 
-    public Salas getSala() {
-        return sala;
+    public int getSala() {
+        return salaId;
     }
 }

@@ -14,6 +14,12 @@ public class Horarios {
     private String inicio;
     private String fim;
 
+    public Horarios(int id, String inicio, String fim) {
+        this.id = id;
+        this.inicio = inicio;
+        this.fim = fim;
+    }
+
     public int getId() {
         return id;
     }

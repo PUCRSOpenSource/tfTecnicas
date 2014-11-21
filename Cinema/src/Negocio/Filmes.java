@@ -22,6 +22,16 @@ public class Filmes {
         return id;
     }
 
+    public Filmes(int id, String nome, String cartaz, int anolancamento, String sinopse, String diretor, String Atores) {
+        this.id = id;
+        this.nome = nome;
+        this.cartaz = cartaz;
+        this.anolancamento = anolancamento;
+        this.sinopse = sinopse;
+        this.diretor = diretor;
+        this.Atores = Atores;
+    }
+
     public String getNome() {
         return nome;
     }

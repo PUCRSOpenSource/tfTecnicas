@@ -10,13 +10,17 @@ import Negocio.Ingressos;
 import Negocio.IngressosDAO;
 import Negocio.IngressosDAOException;
 import Negocio.Sessoes;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author CanTM
  */
-public class IngressosDAODerby implements IngressosDAO{
+public class IngressosDAODerby implements IngressosDAO {
 
     @Override
     public void adicionaIngresso(Ingressos ingresso) throws IngressosDAOException {
@@ -40,7 +44,26 @@ public class IngressosDAODerby implements IngressosDAO{
 
     @Override
     public List<Ingressos> buscaTodosIngressos() throws IngressosDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Ingressos> ingressos = new ArrayList<>();
+        String sql = "select * from ingressos";
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (Statement comando = conexao.createStatement()) {
+                try (ResultSet resultado = comando.executeQuery(sql)) {
+                    while (resultado.next()) {
+                        Ingressos ingresso = new Ingressos(
+                                resultado.getInt("ID"),
+                                resultado.getInt("IDSESSAO"),
+                                resultado.getInt("IDCADEIRA"),
+                                resultado.getDouble("VALORPAGO")
+                        );
+                        ingressos.add(ingresso);
+                    }
+                    return ingressos;
+                }
+            }
+        } catch (Exception e) {
+            throw new IngressosDAOException("Falha na busca de todos os ingressos", e);
+        }
     }
-    
+
 }

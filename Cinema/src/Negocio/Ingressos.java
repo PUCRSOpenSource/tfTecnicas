@@ -11,20 +11,27 @@ package Negocio;
  */
 public class Ingressos {
     private int id;
-    private Sessoes sessao;
-    private Cadeiras cadeira;
+    private int sessaoId;
+    private int cadeiraId;
     private double valorPago;
+
+    public Ingressos(int id, int sessaoId, int cadeiraId, double valorPago) {
+        this.id = id;
+        this.sessaoId = sessaoId;
+        this.cadeiraId = cadeiraId;
+        this.valorPago = valorPago;
+    }
 
     public int getId() {
         return id;
     }
 
-    public Sessoes getSessao() {
-        return sessao;
+    public int getSessao() {
+        return sessaoId;
     }
 
-    public Cadeiras getCadeira() {
-        return cadeira;
+    public int getCadeira() {
+        return cadeiraId;
     }
 
     public double getValorPago() {

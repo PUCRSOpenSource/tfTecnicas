@@ -11,6 +11,10 @@ import Negocio.Salas;
 import Negocio.Sessoes;
 import Negocio.SessoesDAO;
 import Negocio.SessoesDAOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,7 +56,29 @@ public class SessoesDAODearby implements SessoesDAO {
 
     @Override
     public List<Sessoes> buscaPorFilma(Filmes filme) throws SessoesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Sessoes> sessoes = new ArrayList<>();
+        String sql = "select * from sessoes";
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (Statement comando = conexao.createStatement()) {
+                try (ResultSet resultado = comando.executeQuery(sql)) {
+                    while (resultado.next()) {
+                        Sessoes sessao = new Sessoes(
+                                resultado.getInt("ID"),
+                                resultado.getDate("DIA"),
+                                resultado.getInt("VAGAS"),
+                                resultado.getDouble("VALORINTEGRAL"),
+                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDHORARIO"),
+                                resultado.getInt("IDFILME")
+                        );
+                        sessoes.add(sessao);
+                    }
+                    return sessoes;
+                }
+            }
+        } catch (Exception e) {
+            throw new SessoesDAOException("Falha na busca de todos as sessoes", e);
+        }
     }
-    
+
 }

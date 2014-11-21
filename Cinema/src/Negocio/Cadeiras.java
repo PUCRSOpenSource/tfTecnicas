@@ -11,19 +11,25 @@ package Negocio;
  */
 public class Cadeiras {
     private int id;
-    private Salas sala;
+    private int salaId;
     private boolean disponibilidade;
+
+    public Cadeiras(int id, int salaId, boolean disponibilidade) {
+        this.id = id;
+        this.salaId = salaId;
+        this.disponibilidade = disponibilidade;
+    }
 
     public int getId() {
         return id;
     }
 
-    public Salas getSala() {
-        return sala;
+    public int getSalaId() {
+        return salaId;
     }
 
-    public void setSala(Salas sala) {
-        this.sala = sala;
+    public void setSalaId(int salaId) {
+        this.salaId = salaId;
     }
 
     public boolean isDisponibilidade() {

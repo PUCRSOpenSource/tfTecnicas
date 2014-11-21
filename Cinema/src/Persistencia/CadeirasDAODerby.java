@@ -9,6 +9,10 @@ import Negocio.Cadeiras;
 import Negocio.CadeirasDAO;
 import Negocio.CadeirasDAOException;
 import Negocio.Salas;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +43,24 @@ public class CadeirasDAODerby implements CadeirasDAO {
 
     @Override
     public List<Cadeiras> buscaTodasCadeiras() throws CadeirasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Cadeiras> cadeiras = new ArrayList<>();
+        String sql = "select * from cadeiras";
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (Statement comando = conexao.createStatement()) {
+                try (ResultSet resultado = comando.executeQuery(sql)) {
+                    while (resultado.next()) {
+                        Cadeiras cadeira = new Cadeiras(
+                                resultado.getInt("ID"),
+                                resultado.getInt("IDSALA"),
+                                resultado.getBoolean("DISPONIBILIDADE"));
+                        cadeiras.add(cadeira);
+                    }
+                    return cadeiras;
+                }
+            }
+        } catch (Exception e) {
+            throw new CadeirasDAOException("Falha na busca de todas as Cadeiras", e);
+        }
     }
-    
+
 }

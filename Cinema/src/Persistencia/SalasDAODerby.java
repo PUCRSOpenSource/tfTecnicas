@@ -8,6 +8,10 @@ package Persistencia;
 import Negocio.Salas;
 import Negocio.SalasDAO;
 import Negocio.SalasDAOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +32,24 @@ public class SalasDAODerby implements SalasDAO {
 
     @Override
     public List<Salas> buscaTodasSalas() throws SalasDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Salas> salas = new ArrayList<>();
+        String sql = "select * from salas";
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (Statement comando = conexao.createStatement()) {
+                try (ResultSet resultado = comando.executeQuery(sql)) {
+                    while (resultado.next()) {
+                        Salas sala = new Salas(
+                                resultado.getInt("ID"),
+                                resultado.getInt("CAPACIDADE")
+                        );
+                        salas.add(sala);
+                    }
+                    return salas;
+                }
+            }
+        } catch (Exception e) {
+            throw new SalasDAOException("Falha na busca de todos as salas", e);
+        }
     }
-    
+
 }

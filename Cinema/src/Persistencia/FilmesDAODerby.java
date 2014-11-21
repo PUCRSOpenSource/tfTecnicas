@@ -8,6 +8,10 @@ package Persistencia;
 import Negocio.Filmes;
 import Negocio.FilmesDAO;
 import Negocio.FilmesDAOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +37,29 @@ public class FilmesDAODerby implements FilmesDAO {
 
     @Override
     public List<Filmes> buscaTodosFilmes() throws FilmesDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Filmes> filmes = new ArrayList<>();
+        String sql = "select * from filmes";
+        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
+            try (Statement comando = conexao.createStatement()) {
+                try (ResultSet resultado = comando.executeQuery(sql)) {
+                    while (resultado.next()) {
+                        Filmes filme = new Filmes(
+                                resultado.getInt("ID"),
+                                resultado.getString("NOME"),
+                                resultado.getString("CARTAZ"),
+                                resultado.getInt("ANOLANCAMENTO"),
+                                resultado.getString("SINOPSE"),
+                                resultado.getString("DIRETOR"),
+                                resultado.getString("ATORES")
+                        );
+                        filmes.add(filme);
+                    }
+                    return filmes;
+                }
+            }
+        } catch (Exception e) {
+            throw new FilmesDAOException("Falha na busca de todos os filmes", e);
+        }
     }
-    
+
 }
