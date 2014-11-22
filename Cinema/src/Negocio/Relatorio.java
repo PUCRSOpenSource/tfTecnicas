@@ -9,21 +9,21 @@ package Negocio;
  *
  * @author CanTM
  */
-public class RelatorioFilmes {
-    private String nomeDoFilme;
+public class Relatorio {
+    private Object object;
     private int quantidadeIngressosVendidos;
 
-    public RelatorioFilmes(String nomeDoFilme, int quantidadeIngressosVendidos) {
-        this.nomeDoFilme = nomeDoFilme;
+    public Relatorio(Object object, int quantidadeIngressosVendidos) {
+        this.object = object;
         this.quantidadeIngressosVendidos = quantidadeIngressosVendidos;
     }
 
-    public String getNomeDoFilme() {
-        return nomeDoFilme;
+    public Object getObject() {
+        return object;
     }
 
-    public void setNomeDoFilme(String nomeDoFilme) {
-        this.nomeDoFilme = nomeDoFilme;
+    public void setObject(Object object) {
+        this.object = object;
     }
 
     public int getQuantidadeIngressosVendidos() {
@@ -36,7 +36,9 @@ public class RelatorioFilmes {
 
     @Override
     public String toString() {
-        return "RelatorioFilmes{" + "nomeDoFilme=" + nomeDoFilme + ", quantidadeIngressosVendidos=" + quantidadeIngressosVendidos + '}';
+        return "RelatorioFilmes{" + "object=" + object + ", quantidadeIngressosVendidos=" + quantidadeIngressosVendidos + '}';
     }
+
+
     
 }

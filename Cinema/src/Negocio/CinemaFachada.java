@@ -85,30 +85,34 @@ public class CinemaFachada {
         return compraEfetuada;
     }
     
-    //Funcionalidades usadas somente pelo gerente, ainda não implementadas
-    public boolean adcionarFilmeParaExibicao(Filmes filme){
+    //Funcionalidades usadas somente pelo gerente
+    public boolean adcionarFilmeParaExibicao(Filmes filme) throws FilmesDAOException{
         //adiciona um novo filme para exibição
-        boolean adicionou = false;
+        filmesDAO = new FilmesDAODerby();
+        boolean adicionou = filmesDAO.adicionaFilme(filme);;
         return adicionou;
     }
     
-    public boolean adicionaSessao(Date data, double valorIntegral, int salaId, int horarioId, int filmeId){
+    public boolean adicionaSessao(Sessoes sessao) throws SessoesDAOException{
         //adiciona uma nova sessao de exibição para um filme
-        boolean adicionou = false;
+        sessoesDAO = new SessoesDAODerby();
+        boolean adicionou = sessoesDAO.adicionaSessao(sessao);
         return adicionou;
     }
     
-    public List<RelatorioFilmes> totalIngressosPorFilme(Date data){
+    public ArrayList<Relatorio> totalIngressosPorFilme(Date data, Filmes filme) throws SessoesDAOException, IngressosDAOException{
         //retorna uma lista com o valor total de ingressos vendidos para cada filme em um determinado dia
         //provavelmente vai ser necessário uma classe MontaRelatorio
-        List<RelatorioFilmes> relatorio = new ArrayList<>();
+        MontaRelatorio mr = new MontaRelatorio();
+        ArrayList<Relatorio> relatorio = mr.relatorioFilmes(data, filme);
         return relatorio;
     }
     
-    public List<RelatorioSalas> totalIngressosPorSala(Date data){
+    public ArrayList<Relatorio> totalIngressosPorSala(Date data, Salas sala) throws SessoesDAOException, IngressosDAOException{
         //retorna uma lista com o valor total de ingressos vendidos para cada sala em um determinado dia
         //provavelmente vai ser necessário uma classe MontaRelatorio
-        List<RelatorioSalas> relatorio = new ArrayList<>();
+        MontaRelatorio mr = new MontaRelatorio();
+        ArrayList<Relatorio> relatorio = mr.relatorioSalas(data, sala);
         return relatorio;
     }
 }

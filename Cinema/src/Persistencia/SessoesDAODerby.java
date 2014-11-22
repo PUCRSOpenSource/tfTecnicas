@@ -23,9 +23,10 @@ import java.util.List;
 public class SessoesDAODerby implements SessoesDAO {
 
     @Override
-    public void adicionaSessao(Sessoes sessao) throws SessoesDAOException {
+    public boolean adicionaSessao(Sessoes sessao) throws SessoesDAOException {
         String sql = "insert into sessoes(ID,DIA,VAGAS,VALORINTEGRAL,IDSALA,IDHORARIO,IDFILME) values(?,?,?,?,?,?,?)";
         int resultado = 0;
+        boolean adicionou = false;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, sessao.getId());
@@ -37,12 +38,14 @@ public class SessoesDAODerby implements SessoesDAO {
                 comando.setInt(7, sessao.getFilmeId());
                 resultado = comando.executeUpdate();
             }
+            adicionou = true;
         } catch (Exception e) {
             throw new SessoesDAOException("Falha na inserção de sessao", e);
         }
         if (resultado == 0) {
             throw new SessoesDAOException("Falha na inserção de sessao");
         }
+        return adicionou;
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface FilmesDAO {
     
-    public void adicionaFilme(Filmes filme) throws FilmesDAOException;  
+    public boolean adicionaFilme(Filmes filme) throws FilmesDAOException;  
 
     public Filmes buscaFilmePorNome(String nome) throws FilmesDAOException;
     

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface SessoesDAO {
 
-    public void adicionaSessao(Sessoes sessao) throws SessoesDAOException;
+    public boolean adicionaSessao(Sessoes sessao) throws SessoesDAOException;
 
     public void atualizaVagas(int id, int vagas) throws SessoesDAOException;
 

@@ -22,9 +22,10 @@ import java.util.List;
 public class FilmesDAODerby implements FilmesDAO {
 
     @Override
-    public void adicionaFilme(Filmes filme) throws FilmesDAOException {
+    public boolean adicionaFilme(Filmes filme) throws FilmesDAOException {
         String sql = "insert into filmes(ID,NOME,CARTAZ,ANOLANCAMENTO,SINOPSE,DIRETOR,ATORES) values(?,?,?,?,?,?,?)";
         int resultado = 0;
+        boolean adicionou = false;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, filme.getId());
@@ -36,12 +37,14 @@ public class FilmesDAODerby implements FilmesDAO {
                 comando.setString(7, filme.getAtores());
                 resultado = comando.executeUpdate();
             }
+            adicionou = true;
         } catch (Exception e) {
             throw new FilmesDAOException("Falha na inserção de filme", e);
         }
         if (resultado == 0) {
             throw new FilmesDAOException("Falha na inserção de filme");
         }
+        return adicionou;
     }
 
     @Override
