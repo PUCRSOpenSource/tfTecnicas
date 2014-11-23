@@ -5,8 +5,13 @@
  */
 package cinema;
 
+import Negocio.CinemaFachada;
+import Negocio.FilmesDAOException;
+import Negocio.HorariosDAOException;
 import Negocio.Sessoes;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,13 +22,36 @@ public class GUISessoes extends javax.swing.JFrame {
     /**
      * Creates new form GUISessoes
      */
-    public GUISessoes(ArrayList<Sessoes> al) {
+    public GUISessoes(ArrayList<Sessoes> sessoes) {
+        CinemaFachada cf = new CinemaFachada();
         initComponents();
-        jLabel1.setText(jLabel1.getText() + " " + al.get(0).getDate().toString());
-        for (Sessoes al1 : al) {
-            jLabel2.setText(jLabel2.getText() + "Filme: " + al1.getFilmeId() + "\n");
-            jLabel2.setText(jLabel2.getText() + "Sala: " + al1.getSalaId() + "\n");
-            jLabel2.setText(jLabel2.getText() + "Vagas: " + al1.getVagas() + "\n");
+        jLabel1.setText(jLabel1.getText() + " " + sessoes.get(0).getDate().toString());
+        for (Sessoes s : sessoes) {
+            String nomeDoFilme = null;
+            String horarioInicio = null;
+            String horarioFim = null;
+            String vagas = null;
+            if (s.getVagas() > 0){
+                vagas = "Há vagas";
+            }
+            else{
+                vagas = "Sessao esgotada";
+            }
+            try {
+                nomeDoFilme = cf.buscaFilmePorId(s.getFilmeId());
+            } catch (FilmesDAOException ex) {
+                Logger.getLogger(GUISessoes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                horarioInicio = cf.buscarHorarioDeInicioDaSessao(s.getHorarioId());
+                horarioFim = cf.buscarHorarioDeFimDaSessao(s.getHorarioId());
+            } catch (HorariosDAOException ex) {
+                Logger.getLogger(GUISessoes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            jLabel2.setText(jLabel2.getText() + "Filme: " + nomeDoFilme + "  ");
+            jLabel2.setText(jLabel2.getText() + "Horario de Início: " + horarioInicio + "  ");
+            jLabel2.setText(jLabel2.getText() + "Horario de Fim: " + horarioFim + "  ");
+            jLabel2.setText(jLabel2.getText() + "Vagas: " + vagas + "  ");
         }
     }
 
@@ -51,18 +79,18 @@ public class GUISessoes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();

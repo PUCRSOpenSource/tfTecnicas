@@ -42,6 +42,28 @@ public class CinemaFachada {
         return sessoes;
     }
     
+    public String buscaFilmePorId(int filmeId) throws FilmesDAOException{
+        filmesDAO = new FilmesDAODerby();
+        Filmes filme = null;
+        filme = filmesDAO.buscaFilmePorId(filmeId);
+        String nomeDoFilme = filme.getNome();
+        return nomeDoFilme;
+    }
+    
+    public String buscarHorarioDeInicioDaSessao(int horarioId) throws HorariosDAOException{
+        horariosDAO = new HorariosDAODerby();
+        Horarios horario = horariosDAO.buscaHorarioPorId(horarioId);
+        String inicio = horario.getInicio();
+        return inicio;
+    }
+    
+    public String buscarHorarioDeFimDaSessao(int horarioId) throws HorariosDAOException{
+        horariosDAO = new HorariosDAODerby();
+        Horarios horario = horariosDAO.buscaHorarioPorId(horarioId);
+        String fim = horario.getFim();
+        return fim;
+    }
+    
     public List<Sessoes> buscarSessoesPorData(Date data) throws SessoesDAOException{
         //Busca as sessões de exibição por data
         sessoesDAO = new SessoesDAODerby();
