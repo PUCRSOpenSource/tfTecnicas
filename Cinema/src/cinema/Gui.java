@@ -98,7 +98,7 @@ public class Gui extends javax.swing.JFrame {
             }
         }
         String t[] = jTextField1.getText().split(" ");
-        Date date = new Date(Integer.parseInt(t[0]), Integer.parseInt(t[1]), Integer.parseInt(t[2]));
+        Date date = new Date(Integer.parseInt(t[0]) - 1900, Integer.parseInt(t[1]) - 1, Integer.parseInt(t[2]));
         try {
             ArrayList<Sessoes> l = (ArrayList<Sessoes>) cf.buscarSessoesPorData(date);
             jTextField1.setText(l.toString());

@@ -9,11 +9,11 @@ import Negocio.Sessoes;
 import Negocio.SessoesDAO;
 import Negocio.SessoesDAOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public class SessoesDAODerby implements SessoesDAO {
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, sessao.getId());
-                comando.setDate(2, (java.sql.Date) sessao.getDate());
+                comando.setDate(2, sessao.getDate());
                 comando.setInt(3, sessao.getVagas());
                 comando.setDouble(4, sessao.getValorIntegral());
                 comando.setInt(5, sessao.getSalaId());
@@ -99,7 +99,7 @@ public class SessoesDAODerby implements SessoesDAO {
         List<Sessoes> sessoes = new ArrayList<>();
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
-                comando.setDate(1, (java.sql.Date) data);
+                comando.setDate(1, data);
                 try (ResultSet resultado = comando.executeQuery()) {
                     if (resultado.next()) {
                         sessao = new Sessoes(
