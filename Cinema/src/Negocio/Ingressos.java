@@ -13,14 +13,12 @@ public class Ingressos {
 
     private int id;
     private int sessaoId;
-    private int salaId;
     private int cadeiraId;
     private double valorPago;
 
-    public Ingressos(int id, int sessaoId, int salaId, int cadeiraId, double valorPago) {
+    public Ingressos(int id, int sessaoId, int cadeiraId, double valorPago) {
         this.id = id;
         this.sessaoId = sessaoId;
-        this.salaId = salaId;
         this.cadeiraId = cadeiraId;
         this.valorPago = valorPago;
     }
@@ -41,14 +39,6 @@ public class Ingressos {
         this.sessaoId = sessaoId;
     }
 
-    public int getSalaId() {
-        return salaId;
-    }
-
-    public void setSalaId(int salaId) {
-        this.salaId = salaId;
-    }
-
     public int getCadeiraId() {
         return cadeiraId;
     }
@@ -67,7 +57,7 @@ public class Ingressos {
 
     @Override
     public String toString() {
-        return "Ingressos{" + "sessaoId=" + sessaoId + ", salaId=" + salaId + ", cadeiraId=" + cadeiraId + ", valorPago=" + valorPago + '}';
+        return "Ingressos{" + "sessaoId=" + sessaoId + ", cadeiraId=" + cadeiraId + ", valorPago=" + valorPago + '}';
     }
 
 }

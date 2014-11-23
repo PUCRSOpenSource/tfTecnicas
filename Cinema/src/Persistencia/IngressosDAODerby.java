@@ -23,13 +23,12 @@ public class IngressosDAODerby implements IngressosDAO {
 
     @Override
     public void adicionaIngresso(Ingressos ingresso) throws IngressosDAOException {
-        String sql = "insert into ingressos(ID,IDSESSAO,IDSALA,IDCADEIRA,VALORPAGO) values(?,?,?,?,?)";
+        String sql = "insert into ingressos(ID,IDSESSAO,IDCADEIRA,VALORPAGO) values(?,?,?,?,?)";
         int resultado = 0;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, ingresso.getId());
                 comando.setInt(2, ingresso.getSessaoId());
-                comando.setInt(3, ingresso.getSalaId());
                 comando.setInt(4, ingresso.getCadeiraId());
                 comando.setDouble(5, ingresso.getValorPago());
                 resultado = comando.executeUpdate();
@@ -54,7 +53,6 @@ public class IngressosDAODerby implements IngressosDAO {
                         ingresso = new Ingressos(
                                 resultado.getInt("ID"),
                                 resultado.getInt("IDSESSAO"),
-                                resultado.getInt("IDSALA"),
                                 resultado.getInt("IDCADEIRA"),
                                 resultado.getDouble("VALORPAGO")
                         );
@@ -80,7 +78,6 @@ public class IngressosDAODerby implements IngressosDAO {
                         ingresso = new Ingressos(
                                 resultado.getInt("ID"),
                                 resultado.getInt("IDSESSAO"),
-                                resultado.getInt("IDSALA"),
                                 resultado.getInt("IDCADEIRA"),
                                 resultado.getDouble("VALORPAGO")
                         );
@@ -105,7 +102,6 @@ public class IngressosDAODerby implements IngressosDAO {
                         Ingressos ingresso = new Ingressos(
                                 resultado.getInt("ID"),
                                 resultado.getInt("IDSESSAO"),
-                                resultado.getInt("IDSALA"),
                                 resultado.getInt("IDCADEIRA"),
                                 resultado.getDouble("VALORPAGO")
                         );

@@ -23,12 +23,12 @@ public class CadeirasDAODerby implements CadeirasDAO {
 
     @Override
     public void adicionaCadeira(Cadeiras cadeira) throws CadeirasDAOException {
-        String sql = "insert into cadeiras(ID,IDSALA,DISPONIBILIDADE) values(?,?,?)";
+        String sql = "insert into cadeiras(ID,IDSESSAO,DISPONIBILIDADE) values(?,?,?)";
         int resultado = 0;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, cadeira.getId());
-                comando.setInt(2, cadeira.getSalaId());
+                comando.setInt(2, cadeira.getSessaoId());
                 comando.setBoolean(3, cadeira.isDisponibilidade());
                 resultado = comando.executeUpdate();
             }
@@ -68,7 +68,7 @@ public class CadeirasDAODerby implements CadeirasDAO {
                     if (resultado.next()) {
                         cadeira = new Cadeiras(
                                 resultado.getInt("ID"),
-                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDSESSAO"),
                                 resultado.getBoolean("DISPONIBILIDADE")
                         );
                     }
@@ -81,18 +81,18 @@ public class CadeirasDAODerby implements CadeirasDAO {
     }
 
     @Override
-    public List<Cadeiras> buscaCadeirasPorSala(int salaId) throws CadeirasDAOException {
-        String sql = "select * from cadeiras where IDSALA = ?";
+    public List<Cadeiras> buscaCadeirasPorSessao(int sessaoId) throws CadeirasDAOException {
+        String sql = "select * from cadeiras where IDSESSO = ?";
         List<Cadeiras> cadeiras = new ArrayList<>();
         Cadeiras cadeira = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
-                comando.setInt(1, salaId);
+                comando.setInt(1, sessaoId);
                 try (ResultSet resultado = comando.executeQuery()) {
                     if (resultado.next()) {
                         cadeira = new Cadeiras(
                                 resultado.getInt("ID"),
-                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDSESSAO"),
                                 resultado.getBoolean("DISPONIBILIDADE")
                         );
                         cadeiras.add(cadeira);
@@ -115,7 +115,7 @@ public class CadeirasDAODerby implements CadeirasDAO {
                     while (resultado.next()) {
                         Cadeiras cadeira = new Cadeiras(
                                 resultado.getInt("ID"),
-                                resultado.getInt("IDSALA"),
+                                resultado.getInt("IDSESSAO"),
                                 resultado.getBoolean("DISPONIBILIDADE")
                         );
                         cadeiras.add(cadeira);

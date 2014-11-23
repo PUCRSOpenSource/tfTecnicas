@@ -12,12 +12,12 @@ package Negocio;
 public class Cadeiras {
 
     private int id;
-    private int salaId;
+    private int sessaoId;
     private boolean disponibilidade;
 
-    public Cadeiras(int id, int salaId, boolean disponibilidade) {
+    public Cadeiras(int id, int sessaoId, boolean disponibilidade) {
         this.id = id;
-        this.salaId = salaId;
+        this.sessaoId = sessaoId;
         this.disponibilidade = disponibilidade;
     }
 
@@ -29,12 +29,12 @@ public class Cadeiras {
         this.id = id;
     }
 
-    public int getSalaId() {
-        return salaId;
+    public int getSessaoId() {
+        return sessaoId;
     }
 
-    public void setSalaId(int salaId) {
-        this.salaId = salaId;
+    public void setSessaoId(int sessaoId) {
+        this.sessaoId = sessaoId;
     }
 
     public boolean isDisponibilidade() {
@@ -47,7 +47,7 @@ public class Cadeiras {
 
     @Override
     public String toString() {
-        return "Cadeiras{" + "salaId=" + salaId + ", disponibilidade=" + disponibilidade + '}';
+        return "Cadeiras{" + "sessaoId=" + sessaoId + ", disponibilidade=" + disponibilidade + '}';
     }
 
 }
