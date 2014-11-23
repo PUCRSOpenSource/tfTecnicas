@@ -13,9 +13,7 @@ import java.util.List;
  */
 public interface IngressosDAO {
 
-    public void adicionaIngresso(Ingressos ingresso) throws IngressosDAOException;
-
-    public Ingressos buscaPorId(int id) throws IngressosDAOException;
+    public boolean adicionaIngresso(Ingressos ingresso) throws IngressosDAOException;
 
     public List<Ingressos> buscaPorSessao(int sessaoId) throws IngressosDAOException;
 

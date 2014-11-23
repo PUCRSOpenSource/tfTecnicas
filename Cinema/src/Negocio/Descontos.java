@@ -42,4 +42,28 @@ public class Descontos {
         }
         return valorComDesconto;
     }
+
+    public double getDescontoIdoso(double valorIntegralUnitario, int quantidade) {
+        double valorComDesconto = valorIntegralUnitario - (valorIntegralUnitario * 0.4);
+        return valorComDesconto * getDescontoQuantidade(quantidade);
+    }
+
+    public double getDescontoCrianca(double valorIntegralUnitario, int quantidade) {
+        double valorComDesconto = valorIntegralUnitario - (valorIntegralUnitario * 0.5);
+        return valorComDesconto * getDescontoQuantidade(quantidade);
+    }
+    
+    public double getDescontoAdulto(double valorIntegralUnitario, int quantidade){
+        return valorIntegralUnitario * getDescontoQuantidade(quantidade);
+    }
+
+    public double getDescontoQuantidade(int quantidade) {
+        double x = 0;
+        if (quantidade >= 5) {
+            x = 0.95;
+        } else {
+            x = 1;
+        }
+        return x;
+    }
 }

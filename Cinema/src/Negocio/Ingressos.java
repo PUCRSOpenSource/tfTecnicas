@@ -11,24 +11,14 @@ package Negocio;
  */
 public class Ingressos {
 
-    private int id;
     private int sessaoId;
     private int cadeiraId;
     private double valorPago;
 
-    public Ingressos(int id, int sessaoId, int cadeiraId, double valorPago) {
-        this.id = id;
+    public Ingressos(int sessaoId, int cadeiraId, double valorPago) {
         this.sessaoId = sessaoId;
         this.cadeiraId = cadeiraId;
         this.valorPago = valorPago;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getSessaoId() {

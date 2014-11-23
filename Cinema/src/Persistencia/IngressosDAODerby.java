@@ -22,47 +22,25 @@ import java.util.List;
 public class IngressosDAODerby implements IngressosDAO {
 
     @Override
-    public void adicionaIngresso(Ingressos ingresso) throws IngressosDAOException {
-        String sql = "insert into ingressos(ID,IDSESSAO,IDCADEIRA,VALORPAGO) values(?,?,?,?,?)";
+    public boolean adicionaIngresso(Ingressos ingresso) throws IngressosDAOException {
+        String sql = "insert into ingressos(IDSESSAO,IDCADEIRA,VALORPAGO) values(?,?,?)";
         int resultado = 0;
+        boolean adicionou = false;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
-                comando.setInt(1, ingresso.getId());
-                comando.setInt(2, ingresso.getSessaoId());
-                comando.setInt(4, ingresso.getCadeiraId());
-                comando.setDouble(5, ingresso.getValorPago());
+                comando.setInt(1, ingresso.getSessaoId());
+                comando.setInt(2, ingresso.getCadeiraId());
+                comando.setDouble(3, ingresso.getValorPago());
                 resultado = comando.executeUpdate();
             }
+            adicionou = true;
         } catch (Exception e) {
             throw new IngressosDAOException("Falha na inserção de ingresso", e);
         }
         if (resultado == 0) {
             throw new IngressosDAOException("Falha na inserção de ingresso");
         }
-    }
-
-    @Override
-    public Ingressos buscaPorId(int id) throws IngressosDAOException {
-        String sql = "select * from ingressos where ID = ?";
-        Ingressos ingresso = null;
-        try (Connection conexao = InicializadorBancoDados.conectarBd()) {
-            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
-                comando.setInt(1, id);
-                try (ResultSet resultado = comando.executeQuery()) {
-                    if (resultado.next()) {
-                        ingresso = new Ingressos(
-                                resultado.getInt("ID"),
-                                resultado.getInt("IDSESSAO"),
-                                resultado.getInt("IDCADEIRA"),
-                                resultado.getDouble("VALORPAGO")
-                        );
-                    }
-                    return ingresso;
-                }
-            }
-        } catch (Exception e) {
-            throw new IngressosDAOException("Falha na busca do ingresso por ID", e);
-        }
+        return adicionou;
     }
 
     @Override
@@ -76,7 +54,6 @@ public class IngressosDAODerby implements IngressosDAO {
                 try (ResultSet resultado = comando.executeQuery()) {
                     if (resultado.next()) {
                         ingresso = new Ingressos(
-                                resultado.getInt("ID"),
                                 resultado.getInt("IDSESSAO"),
                                 resultado.getInt("IDCADEIRA"),
                                 resultado.getDouble("VALORPAGO")
@@ -100,7 +77,6 @@ public class IngressosDAODerby implements IngressosDAO {
                 try (ResultSet resultado = comando.executeQuery(sql)) {
                     while (resultado.next()) {
                         Ingressos ingresso = new Ingressos(
-                                resultado.getInt("ID"),
                                 resultado.getInt("IDSESSAO"),
                                 resultado.getInt("IDCADEIRA"),
                                 resultado.getDouble("VALORPAGO")
