@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TesteTmdbTecnicas {
 
-    public static void main(String[] args) throws FachadaServicoTmdbException {
+    /*public static void main(String[] args) throws FachadaServicoTmdbException {
         FachadaServicoTmdb tmdb = new FachadaServicoTmdb("5a1a77e2eba8984804586122754f969f");
         List<MovieDb> resultado = tmdb.buscarFilmes("Star Wars");
         for (MovieDb filme : resultado) {
@@ -15,6 +15,6 @@ public class TesteTmdbTecnicas {
             System.out.println(filme.getPosterPath());
             System.out.println("-----------------");
         }
-    }
+    }*/
     
 }

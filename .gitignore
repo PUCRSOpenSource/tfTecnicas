@@ -1,3 +1,4 @@
 *.class
 /Cinema/nbproject/private/
+/Cinema/nbproject/project.properties
 /Cinema/build/
