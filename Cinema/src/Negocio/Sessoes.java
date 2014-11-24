@@ -23,8 +23,7 @@ public class Sessoes {
     private int horarioId;
     private int filmeId;
 
-    public Sessoes(int id, Date date, int vagas, double valorIntegral, int salaId, int horarioId, int filmeId) {
-        this.id = id;
+    public Sessoes(Date date, int vagas, double valorIntegral, int salaId, int horarioId, int filmeId) {
         this.date = date;
         this.vagas = vagas;
         this.valorIntegral = valorIntegral;
