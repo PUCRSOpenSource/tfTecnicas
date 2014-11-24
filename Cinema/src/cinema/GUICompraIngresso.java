@@ -5,7 +5,13 @@
  */
 package cinema;
 
+import Negocio.CadeirasDAOException;
+import Negocio.CinemaFachada;
 import Negocio.Sessoes;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -18,6 +24,20 @@ public class GUICompraIngresso extends javax.swing.JFrame {
      */
     public GUICompraIngresso(Sessoes sessao) {
         initComponents();
+        CinemaFachada cf = new CinemaFachada();
+        ArrayList<Integer> cadeirasLivres;
+        DefaultListModel<String> demoList = new DefaultListModel<>();
+        try {
+            cadeirasLivres = cf.cadeirasLivresNaSessao(sessao);
+            System.out.println(cadeirasLivres.toString());
+            for (Integer cl : cadeirasLivres) {
+                demoList.addElement(cl + "");
+                System.out.println(cl);
+            }
+        } catch (CadeirasDAOException ex) {
+            Logger.getLogger(GUICompraIngresso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jList1.setModel(demoList);
     }
 
     /**
@@ -29,17 +49,40 @@ public class GUICompraIngresso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel1.setText("Cadeiras: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(568, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -47,5 +90,8 @@ public class GUICompraIngresso extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

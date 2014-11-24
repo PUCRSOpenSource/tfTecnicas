@@ -82,14 +82,14 @@ public class CadeirasDAODerby implements CadeirasDAO {
 
     @Override
     public List<Cadeiras> buscaCadeirasPorSessao(int sessaoId) throws CadeirasDAOException {
-        String sql = "select * from cadeiras where IDSESSO = ?";
+        String sql = "select * from cadeiras where IDSESSAO = ?";
         List<Cadeiras> cadeiras = new ArrayList<>();
         Cadeiras cadeira = null;
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, sessaoId);
                 try (ResultSet resultado = comando.executeQuery()) {
-                    if (resultado.next()) {
+                    while (resultado.next()) {
                         cadeira = new Cadeiras(
                                 resultado.getInt("ID"),
                                 resultado.getInt("IDSESSAO"),
