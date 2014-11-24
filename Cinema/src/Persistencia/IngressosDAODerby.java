@@ -52,7 +52,7 @@ public class IngressosDAODerby implements IngressosDAO {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, sessaoId);
                 try (ResultSet resultado = comando.executeQuery()) {
-                    if (resultado.next()) {
+                    while (resultado.next()) {
                         ingresso = new Ingressos(
                                 resultado.getInt("IDSESSAO"),
                                 resultado.getInt("IDCADEIRA"),

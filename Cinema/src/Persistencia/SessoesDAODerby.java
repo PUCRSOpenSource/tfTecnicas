@@ -101,7 +101,7 @@ public class SessoesDAODerby implements SessoesDAO {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setDate(1, data);
                 try (ResultSet resultado = comando.executeQuery()) {
-                    if (resultado.next()) {
+                    while (resultado.next()) {
                         sessao = new Sessoes(
                                 resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
@@ -130,7 +130,7 @@ public class SessoesDAODerby implements SessoesDAO {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, horarioId);
                 try (ResultSet resultado = comando.executeQuery()) {
-                    if (resultado.next()) {
+                    while (resultado.next()) {
                         sessao = new Sessoes(
                                 resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
@@ -159,7 +159,7 @@ public class SessoesDAODerby implements SessoesDAO {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, filmeId);
                 try (ResultSet resultado = comando.executeQuery()) {
-                    if (resultado.next()) {
+                    while (resultado.next()) {
                         sessao = new Sessoes(
                                 resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
