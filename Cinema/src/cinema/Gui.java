@@ -101,7 +101,7 @@ public class Gui extends javax.swing.JFrame {
         Date date = new Date(Integer.parseInt(t[0]) - 1900, Integer.parseInt(t[1]) - 1, Integer.parseInt(t[2]));
         try {
             final ArrayList<Sessoes> l = (ArrayList<Sessoes>) cf.buscarSessoesPorData(date);
-            jTextField1.setText(l.toString());
+            //jTextField1.setText(l.toString());
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new GUISessoes(l).setVisible(true);
