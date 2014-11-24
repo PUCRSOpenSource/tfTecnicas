@@ -18,7 +18,6 @@ public class GUICompraIngresso extends javax.swing.JFrame {
      */
     public GUICompraIngresso(Sessoes sessao) {
         initComponents();
-        
     }
 
     /**

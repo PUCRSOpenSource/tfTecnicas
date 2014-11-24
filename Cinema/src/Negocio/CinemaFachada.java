@@ -92,10 +92,10 @@ public class CinemaFachada {
         return valor;
     }
 
-    public double valorDoIngressoComDescontos(Sessoes sessao, int quantidade, List<Integer> idades) {
+    public double valorDoIngressoComDescontos(Sessoes sessao, List<Integer> idades) {
         //retorna o valor do ingresso já com os descontor aplicados
         Descontos d = new Descontos();
-        double valor = d.calculaValorComDesconto(sessao, quantidade, idades);
+        double valor = d.calculaValorComDesconto(sessao, idades.size(), idades);
         return valor;
     }
 
@@ -103,6 +103,18 @@ public class CinemaFachada {
         //informa sobre a quantidade de ingressos disponíveis para venda para a sessao escolhida    
         int quantidadeDeIngressosDisponiveis = sessao.getVagas();
         return quantidadeDeIngressosDisponiveis;
+    }
+    
+    public ArrayList<Integer> cadeirasLivresNaSessao(Sessoes sessao) throws CadeirasDAOException{
+        cadeirasDAO = new CadeirasDAODerby();
+        ArrayList<Integer> cadeirasLivres = new ArrayList<>();
+        List<Cadeiras> todasCadeiras = cadeirasDAO.buscaCadeirasPorSessao(sessao.getId());
+        for(Cadeiras c : todasCadeiras){
+            if(c.isDisponibilidade() == true){
+                cadeirasLivres.add(c.getId());
+            }
+        }
+        return cadeirasLivres;
     }
 
     public boolean conprarIngresso(Sessoes sessao, List<Integer> nroCadeiras, List<Integer> idades) throws CadeirasDAOException, IngressosDAOException, SessoesDAOException {
