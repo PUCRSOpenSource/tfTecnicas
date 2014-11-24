@@ -23,16 +23,8 @@ public class Salas {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getCapacidade() {
         return capacidade;
-    }
-
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
     }
 
     @Override

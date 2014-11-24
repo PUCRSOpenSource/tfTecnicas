@@ -25,16 +25,8 @@ public class Cadeiras {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getSessaoId() {
         return sessaoId;
-    }
-
-    public void setSessaoId(int sessaoId) {
-        this.sessaoId = sessaoId;
     }
 
     public boolean isDisponibilidade() {

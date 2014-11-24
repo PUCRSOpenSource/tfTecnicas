@@ -25,24 +25,12 @@ public class Ingressos {
         return sessaoId;
     }
 
-    public void setSessaoId(int sessaoId) {
-        this.sessaoId = sessaoId;
-    }
-
     public int getCadeiraId() {
         return cadeiraId;
     }
 
-    public void setCadeiraId(int cadeiraId) {
-        this.cadeiraId = cadeiraId;
-    }
-
     public double getValorPago() {
         return valorPago;
-    }
-
-    public void setValorPago(double valorPago) {
-        this.valorPago = valorPago;
     }
 
     @Override

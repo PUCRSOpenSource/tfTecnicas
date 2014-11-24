@@ -33,56 +33,28 @@ public class Filmes {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getCartaz() {
         return cartaz;
     }
 
-    public void setCartaz(String cartaz) {
-        this.cartaz = cartaz;
-    }
-
     public int getAnolancamento() {
         return anolancamento;
-    }
-
-    public void setAnolancamento(int anolancamento) {
-        this.anolancamento = anolancamento;
     }
 
     public String getSinopse() {
         return sinopse;
     }
 
-    public void setSinopse(String sinopse) {
-        this.sinopse = sinopse;
-    }
-
     public String getDiretor() {
         return diretor;
     }
 
-    public void setDiretor(String diretor) {
-        this.diretor = diretor;
-    }
-
     public String getAtores() {
         return Atores;
-    }
-
-    public void setAtores(String Atores) {
-        this.Atores = Atores;
     }
 
     @Override
