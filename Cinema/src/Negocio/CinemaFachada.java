@@ -9,6 +9,7 @@ import Persistencia.CadeirasDAODerby;
 import Persistencia.FilmesDAODerby;
 import Persistencia.HorariosDAODerby;
 import Persistencia.IngressosDAODerby;
+import Persistencia.SalasDAODerby;
 import Persistencia.SessoesDAODerby;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class CinemaFachada {
     private HorariosDAO horariosDAO;
     private CadeirasDAO cadeirasDAO;
     private IngressosDAO ingressosDAO;
+    private SalasDAO salasDAO;
 
     public Filmes buscarFilme(String nome) throws FilmesDAOException {
         //Busca um filme pelo seu nome
@@ -168,17 +170,21 @@ public class CinemaFachada {
         return adicionou;
     }
 
-    public ArrayList<Relatorio> totalIngressosPorFilme(Date data, Filmes filme) throws SessoesDAOException, IngressosDAOException {
+    public ArrayList<Relatorio> totalIngressosPorFilme(Date data, String filmeNome) throws SessoesDAOException, IngressosDAOException, FilmesDAOException {
         //retorna uma lista com o valor total de ingressos vendidos para cada filme em um determinado dia
         //provavelmente vai ser necessário uma classe MontaRelatorio
+        filmesDAO = new FilmesDAODerby();
+        Filmes filme = filmesDAO.buscaFilmePorNome(filmeNome);
         MontaRelatorio mr = new MontaRelatorio();
         ArrayList<Relatorio> relatorio = mr.relatorioFilmes(data, filme);
         return relatorio;
     }
 
-    public ArrayList<Relatorio> totalIngressosPorSala(Date data, Salas sala) throws SessoesDAOException, IngressosDAOException {
+    public ArrayList<Relatorio> totalIngressosPorSala(Date data, int salaId) throws SessoesDAOException, IngressosDAOException, SalasDAOException {
         //retorna uma lista com o valor total de ingressos vendidos para cada sala em um determinado dia
         //provavelmente vai ser necessário uma classe MontaRelatorio
+        salasDAO = new SalasDAODerby();
+        Salas sala = salasDAO.buscaPorId(salaId);
         MontaRelatorio mr = new MontaRelatorio();
         ArrayList<Relatorio> relatorio = mr.relatorioSalas(data, sala);
         return relatorio;

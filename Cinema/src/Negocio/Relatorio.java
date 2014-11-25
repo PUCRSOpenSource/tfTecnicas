@@ -34,9 +34,13 @@ public class Relatorio {
         this.quantidadeIngressosVendidos = quantidadeIngressosVendidos;
     }
 
-    @Override
-    public String toString() {
-        return "RelatorioFilmes{" + "object=" + object + ", quantidadeIngressosVendidos=" + quantidadeIngressosVendidos + '}';
+
+    public String toStringSala() {
+        return "Relatorio por Sala{" + "Sala=" + object + ", Ingressos Vendidos=" + quantidadeIngressosVendidos + '}';
+    }
+    
+        public String toStringFilme() {
+        return "Relatorio por Filme{" + "Filme=" + object + ", Ingressos Vendidos=" + quantidadeIngressosVendidos + '}';
     }
 
 
