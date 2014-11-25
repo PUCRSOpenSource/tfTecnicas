@@ -101,8 +101,6 @@ public class GUISessoes extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("jLabel8");
-
         jLabel9.setText("Diretor: ");
 
         jTextArea1.setColumns(20);

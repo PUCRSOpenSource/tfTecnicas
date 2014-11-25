@@ -1,4 +1,4 @@
-package tmdbTecnicas;
+package cinema;
 
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.TheMovieDbApi;

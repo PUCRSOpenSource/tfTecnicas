@@ -1,4 +1,4 @@
-package tmdbTecnicas;
+package cinema;
 
 public class FachadaServicoTmdbException extends Exception{
 
