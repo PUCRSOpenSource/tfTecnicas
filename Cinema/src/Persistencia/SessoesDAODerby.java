@@ -54,6 +54,7 @@ public class SessoesDAODerby implements SessoesDAO {
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setInt(1, vagas);
+                comando.setInt(2, id);
                 resultado = comando.executeUpdate();
             }
         } catch (Exception e) {
@@ -74,6 +75,7 @@ public class SessoesDAODerby implements SessoesDAO {
                 try (ResultSet resultado = comando.executeQuery()) {
                     if (resultado.next()) {
                         sessao = new Sessoes(
+                                resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
                                 resultado.getInt("VAGAS"),
                                 resultado.getDouble("VALORINTEGRAL"),
@@ -101,6 +103,7 @@ public class SessoesDAODerby implements SessoesDAO {
                 try (ResultSet resultado = comando.executeQuery()) {
                     while (resultado.next()) {
                         sessao = new Sessoes(
+                                resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
                                 resultado.getInt("VAGAS"),
                                 resultado.getDouble("VALORINTEGRAL"),
@@ -129,6 +132,7 @@ public class SessoesDAODerby implements SessoesDAO {
                 try (ResultSet resultado = comando.executeQuery()) {
                     while (resultado.next()) {
                         sessao = new Sessoes(
+                                resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
                                 resultado.getInt("VAGAS"),
                                 resultado.getDouble("VALORINTEGRAL"),
@@ -157,6 +161,7 @@ public class SessoesDAODerby implements SessoesDAO {
                 try (ResultSet resultado = comando.executeQuery()) {
                     while (resultado.next()) {
                         sessao = new Sessoes(
+                                resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
                                 resultado.getInt("VAGAS"),
                                 resultado.getDouble("VALORINTEGRAL"),
@@ -183,6 +188,7 @@ public class SessoesDAODerby implements SessoesDAO {
                 try (ResultSet resultado = comando.executeQuery(sql)) {
                     while (resultado.next()) {
                         Sessoes sessao = new Sessoes(
+                                resultado.getInt("ID"),
                                 resultado.getDate("DIA"),
                                 resultado.getInt("VAGAS"),
                                 resultado.getDouble("VALORINTEGRAL"),

@@ -47,6 +47,7 @@ public class CadeirasDAODerby implements CadeirasDAO {
         try (Connection conexao = InicializadorBancoDados.conectarBd()) {
             try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 comando.setBoolean(1, disponibilidade);
+                comando.setInt(2, id);
                 resultado = comando.executeUpdate();
             }
         } catch (Exception e) {

@@ -7,11 +7,14 @@ package cinema;
 
 import Negocio.CadeirasDAOException;
 import Negocio.CinemaFachada;
+import Negocio.IngressosDAOException;
 import Negocio.Sessoes;
+import Negocio.SessoesDAOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,11 +26,14 @@ public class GUICompraIngresso extends javax.swing.JFrame {
     private ArrayList<Integer> idades;
     DefaultListModel<Integer> demoList1;
     DefaultListModel<Integer> demoList2;
+    Sessoes sessao;
     /**
      * Creates new form GUICompraIngresso
      */
     public GUICompraIngresso(Sessoes sessao) {
         initComponents();
+        this.sessao = sessao;
+        System.out.println(sessao);
         CinemaFachada cf = new CinemaFachada();
         ArrayList<Integer> cadeirasLivres;
         demoList1 = new DefaultListModel<>();
@@ -36,9 +42,10 @@ public class GUICompraIngresso extends javax.swing.JFrame {
         idades = new ArrayList<>();
         try {
             cadeirasLivres = cf.cadeirasLivresNaSessao(sessao);
+            System.out.println(cadeirasLivres.toString());
             for (Integer cl : cadeirasLivres) {
                 demoList1.addElement(cl);
-            }
+        }
         } catch (CadeirasDAOException ex) {
             Logger.getLogger(GUICompraIngresso.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,6 +71,7 @@ public class GUICompraIngresso extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,6 +91,13 @@ public class GUICompraIngresso extends javax.swing.JFrame {
         jLabel2.setText("Idade: ");
 
         jButton2.setText("Comprar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Valor: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,8 +120,14 @@ public class GUICompraIngresso extends javax.swing.JFrame {
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 163, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -130,7 +151,8 @@ public class GUICompraIngresso extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
@@ -142,16 +164,30 @@ public class GUICompraIngresso extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!jTextField1.getText().equals("")) {
+            CinemaFachada cf = new CinemaFachada();
             int cadeira = (Integer) jList1.getSelectedValue();
             demoList2.addElement(cadeira);
             demoList1.removeElement(cadeira);
             int idade = Integer.parseInt(jTextField1.getText());
             cadeiras.add(cadeira);
             idades.add(idade);
-            System.out.println(cadeiras.toString());
-            System.out.println(idades.toString());
+            jLabel3.setText("Valor: " + cf.valorDoIngressoComDescontos(sessao, idades));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        CinemaFachada cf = new CinemaFachada();
+        boolean result = false;
+        try {
+            result = cf.conprarIngresso(sessao, cadeiras, idades);
+        } catch (CadeirasDAOException | IngressosDAOException | SessoesDAOException ex) {
+            Logger.getLogger(GUICompraIngresso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (result)
+            JOptionPane.showMessageDialog(this, "Compra efetuada com sucesso!");
+        else
+            JOptionPane.showMessageDialog(this, "Compra não efetuada.");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -159,6 +195,7 @@ public class GUICompraIngresso extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JScrollPane jScrollPane1;
